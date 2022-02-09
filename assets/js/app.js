@@ -44,7 +44,7 @@ const makeEl = function(el, classN, idName){
 
 
 //On button press, build out quize
-const buildContainer = function(){
+const buildContainer = function(questionCount){
     mainContainer.remove();
     //create container, time, and score elements
     const containerEl = makeEl("div", "container", "main-container");
@@ -83,13 +83,29 @@ const buildContainer = function(){
     }
 
     questionCount++
+
+}
+
+const startQuiz = function(){
+    buildContainer(questionCount);
+
+}
+
+const checkAwnser = function(e){
+    if(e.target.getAttribute("data-answer")){
+        const choice = e.target.getAttribute("data-answer");
+        if(choice == questions[questionCount].correct){
+            alert("Good choice")
+         }
+        else{
+            alert("Try again");
+        }
+    }
 }
 
 
-btnBegin.addEventListener('click', buildContainer);
+btnBegin.addEventListener('click', startQuiz);
 
-container.addEventListener('click', (e) => {
-    console.log(e.target);
-})
+container.addEventListener('click', checkAwnser);
 
 //just added event listener for container. Make function to react to correct awenser click
