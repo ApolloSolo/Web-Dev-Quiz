@@ -1,0 +1,124 @@
+:root{
+    --primary-bg-color: rgb(78, 207, 247);
+    --accent-color: rgb(0, 111, 145);
+    --primary-font: 'Nunito', sans-serif;
+    --primary-font-size: 1.25rem;
+}
+
+*{box-sizing: border-box;}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: var(--primary-bg-color);
+    font-family: var(--primary-font);
+    font-size: var(--primary-font-size);
+}
+
+h1{
+    margin-bottom: 2.5rem;
+}
+
+#main{
+    height: 100vh;
+    position: relative;
+}
+
+.container{
+    border: solid var(--accent-color) 3px;
+    border-radius: .5rem;
+    width: 65%;
+    min-width: 345px;
+    min-height: 400px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 .5rem;
+}
+
+.quiz-body{
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.question{
+    margin: 0 auto;
+}
+
+.letters{
+    font-weight: bolder;
+    margin-right: .25rem;
+}
+
+.intro{
+    text-align: center;
+    margin: 0 auto;
+}
+
+/*Form styles*/
+
+#tester-initials{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+#tester-initials input{
+    margin: .5rem 0;
+    border: none;
+    border-radius: 2rem;
+    height: 1.5rem;
+    text-align: center;
+}
+
+#tester-initials input:focus{
+    background-color: rgb(129, 205, 228);
+}
+
+#tester-initials button{
+    border: none;
+    border-radius: .5rem;
+    padding: 1rem;
+}
+
+/*Display score*/
+
+.score-holder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 .5rem;
+}
+
+.scores{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 .5rem;
+}
+
+.center{
+    text-align: center;
+}
+
+.center-a{
+    text-decoration: none;
+    position: relative;
+    left: 50%;
+    margin-left: -22px;
+}
+
+.tester-name{
+    margin-right: 2rem;
+}
