@@ -183,7 +183,7 @@ const answerClickHandler = function (e) {
         }
     }
     else if (e.target.getAttribute("data-score")) {
-        loadTestersScore();
+        buildScores();
     }
 };
 
@@ -213,10 +213,11 @@ function saveScore() {
 }
 
 function loadTestersScore() {
-
     const data = localStorage.getItem("testerData");
     testerData = JSON.parse(data);
+}
 
+function buildScores(){
     if (testerData === null) {
         alert("No scores to present");
     }
@@ -254,3 +255,4 @@ function loadTestersScore() {
 btnBegin.addEventListener("click", buildTestContainer);
 
 container.addEventListener("click", answerClickHandler);
+loadTestersScore();
