@@ -44,8 +44,6 @@ const startTimer = function (timeInterval, subTime) {
         document.getElementById("min").innerHTML = minutes + "";
         document.getElementById("sec").innerHTML = seconds + "";
 
-        console.log(minutes, seconds);
-
         if (timeLeft <= 0) {
             clearInterval(timeCount);
             document.getElementById("min").innerHTML = ""
@@ -158,7 +156,6 @@ const buildFormContainer = function () {
 
 
 const answerClickHandler = function (e) {
-    console.log(e.target);
     if (e.target.getAttribute("data-answer")) {
         if (e.target.getAttribute("data-answer") === questions[questionCount].correct) {
             testerScore++
