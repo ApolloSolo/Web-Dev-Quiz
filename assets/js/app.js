@@ -4,8 +4,10 @@ const btnBegin = document.querySelector("#begin-btn");
 
 let questionCount = 0;
 let testerScore = 0;
-const testerData = [];
+let testerData = [];
+let userId = 0;
 
+console.log("Global user id" + " " + userId);
 const options = ["a", "b", "c", "d"];
 
 const questions = [
@@ -80,22 +82,25 @@ const buildTestContainer = function () {
     mainContainer.remove();
     //create container, time, and score elements
 
-    const containerEl = makeEl("div", "container", "main-container");
-    
-    const headerEl = makeEl("div", "header");
-    const scoreEl = makeEl("div", "to-scores");
-    scoreEl.innerHTML = `<h3>View Scores</h3>`;
-    const timeEl = makeEl("div", "time");
+    //only create and append containerEl once in the beginning
     if (questionCount === 0) {
+        const containerEl = makeEl("div", "container", "main-container");
+        const headerEl = makeEl("div", "header");
+        const scoreEl = makeEl("div", "to-scores", "to-scores");
+        scoreEl.innerHTML = `<h3 data-score="scores">View Scores</h3>`;
+        const timeEl = makeEl("div", "time");
+
         timeEl.innerHTML = "<span>Time: </span><span id='min'>00:</span><span id='sec'>00</span><span id='end'></span>";
+
+
+        //Append elements to page
+        headerEl.appendChild(scoreEl);
+        headerEl.appendChild(timeEl);
+        containerEl.appendChild(headerEl);
+        container.appendChild(containerEl);
     }
 
-    //Append elements to page
-    headerEl.appendChild(scoreEl);
-    headerEl.appendChild(timeEl);
-    containerEl.appendChild(headerEl);
-    container.appendChild(containerEl);
-
+    const containerEl = document.querySelector("#main-container");
 
     const quizBodyEl = makeEl("div", "quiz-body", "quiz-body");
     const questionEl = makeEl("div", "question");
@@ -123,7 +128,7 @@ const buildTestContainer = function () {
     }
 
     if (questionCount === 0) {
-        startTimer(5000);
+        startTimer(10000);
     }
 };
 
@@ -132,24 +137,28 @@ const buildFormContainer = function () {
     const formConatiner = makeEl("form", "tester-initials", "tester-initials");
     const labelEl = makeEl("label");
     labelEl.setAttribute("for", "initials");
-    labelEl.textContent = "Enter your initialsEnter your initials"
+    labelEl.textContent = "Enter your initials"
     const inputEl = makeEl("input");
     inputEl.setAttribute("type", "text");
     inputEl.setAttribute("name", "initials");
     const btn = makeEl("button");
     btn.textContent = "Submit"
+    const home = makeEl("a");
+    home.setAttribute("href", "index.html");
+    home.textContent = "Home";
 
     formConatiner.appendChild(labelEl);
     formConatiner.appendChild(inputEl);
     formConatiner.appendChild(btn);
+    formConatiner.appendChild(home);
 
 
     containerEl.appendChild(formConatiner);
-
 }
 
 
 const answerClickHandler = function (e) {
+    console.log(e.target);
     if (e.target.getAttribute("data-answer")) {
         if (e.target.getAttribute("data-answer") === questions[questionCount].correct) {
             testerScore++
@@ -176,6 +185,9 @@ const answerClickHandler = function (e) {
             }
         }
     }
+    else if (e.target.getAttribute("data-score")) {
+        loadTestersScore();
+    }
 };
 
 function endQuiz() {
@@ -183,21 +195,63 @@ function endQuiz() {
     if (quizBody) {
         quizBody.remove();
         buildFormContainer();
-        console.log("Your Score is " + testerScore);
+        const form = document.querySelector("#tester-initials");
+        const submitData = () => {
+            const inputData = document.querySelector('input[name="initials"]');
+            const userData = {
+                score: testerScore,
+                initials: inputData.value
+            }
+            testerData.push(userData);
+            saveScore();
+        }
+        form.addEventListener("submit", submitData);
+
     }
 }
-const addTesterInitial = function () {
-    const form = document.querySelector("#tester-initials");
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const inputData = document.querySelector('input[name="initials"]');
-        const userData = {
-            score: testerScore,
-            initials: inputData.value
+
+//save tester scores
+function saveScore() {
+    localStorage.setItem("testerData", JSON.stringify(testerData));
+}
+
+function loadTestersScore() {
+
+    const data = localStorage.getItem("testerData");
+    testerData = JSON.parse(data);
+
+    if (testerData === null) {
+        alert("No scores to present");
+    }
+    else {
+        mainContainer.innerHTML = "";
+        const outerDiv = makeEl("div", "score-holder");
+        for (let i = 0; i < testerData.length; i++) {
+            const testerName = makeEl("h4");
+            testerName.className = "tester-name";
+            const testerScore = makeEl("p");
+            const div = makeEl("div", "scores");
+
+            testerName.textContent = testerData[i].initials;
+            testerScore.textContent = `${testerData[i].score} / ${questions.length}`;
+
+            div.appendChild(testerName);
+            div.appendChild(testerScore)
+            outerDiv.appendChild(div);
         }
-        testerData.pop(userData)
-        console.log(userData);
-    })
+        const home = makeEl("a");
+        home.setAttribute("href", "index.html");
+        home.textContent = "Home";
+        home.className = "center-a";
+
+        const topScores = makeEl("h2");
+        topScores.textContent = "Top Scores"
+        topScores.className = "center"
+
+        mainContainer.appendChild(topScores);
+        mainContainer.appendChild(outerDiv);
+        mainContainer.appendChild(home);
+    }
 }
 
 btnBegin.addEventListener("click", buildTestContainer);
