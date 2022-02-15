@@ -62,6 +62,7 @@ h1{
 .intro{
     text-align: center;
     margin: 0 auto;
+    padding: 0.25rem;
 }
 
 /*Form styles*/
@@ -122,3 +123,23 @@ h1{
 .tester-name{
     margin-right: 2rem;
 }
+
+/*Button and curser styles*/
+
+/* #begin-btn{
+    background-image: linear-gradient(rgb(50, 106, 211), rgb(5, 122, 103));
+    background-size: -10px 50px;
+    padding: 0.5rem;
+    border: solid var(--accent-color) 2px;
+    border-radius: .125rem;
+    font-size: var(--primary-font-size);
+    font-weight: 700;
+}
+
+#begin-btn:hover{
+    background-image: linear-gradient(rgb(72, 119, 207), rgb(16, 180, 153));
+}
+
+.answers p{
+    cursor: pointer;
+} */

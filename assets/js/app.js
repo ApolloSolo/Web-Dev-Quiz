@@ -7,7 +7,7 @@ let testerScore = 0;
 let testerData = [];
 let userId = 0;
 
-console.log("Global user id" + " " + userId);
+//console.log("Global user id" + " " + userId);
 const options = ["a", "b", "c", "d"];
 
 const questions = [
@@ -193,7 +193,7 @@ function endQuiz() {
         quizBody.remove();
         buildFormContainer();
         const form = document.querySelector("#tester-initials");
-        const submitData = () => {
+        const submitData = function(){
             const inputData = document.querySelector('input[name="initials"]');
             const userData = {
                 score: testerScore,
