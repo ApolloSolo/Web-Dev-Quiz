@@ -215,11 +215,17 @@ function saveScore() {
 function loadTestersScore() {
     const data = localStorage.getItem("testerData");
     testerData = JSON.parse(data);
+    if (testerData === null) {
+        testerData = [];
+        return false;
+    }
 }
 
 function buildScores(){
     if (testerData === null) {
         alert("No scores to present");
+        testerData = [];
+        return false;
     }
     else {
         mainContainer.innerHTML = "";
