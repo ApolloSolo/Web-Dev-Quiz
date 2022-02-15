@@ -41,7 +41,7 @@ const startTimer = function (timeInterval, subTime) {
         let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
         let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-        document.getElementById("min").innerHTML = minutes + "";
+        document.getElementById("min").innerHTML = minutes + ":";
         document.getElementById("sec").innerHTML = seconds + "";
 
         if (timeLeft <= 0) {
