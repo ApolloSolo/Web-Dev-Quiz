@@ -62,7 +62,7 @@ h1{
 .intro{
     text-align: center;
     margin: 0 auto;
-    padding: 0.25rem;
+    padding: 0.5rem;
 }
 
 /*Form styles*/
@@ -124,22 +124,32 @@ h1{
     margin-right: 2rem;
 }
 
-/*Button and curser styles*/
+/* buttons and pointers */
 
-/* #begin-btn{
-    background-image: linear-gradient(rgb(50, 106, 211), rgb(5, 122, 103));
-    background-size: -10px 50px;
-    padding: 0.5rem;
+button{
+    background-image: linear-gradient(rgb(21, 79, 187), rgb(0, 128, 117));
+    background-size: -10 50px;
+    padding: .5rem;
+    border-radius: 0.25rem;
     border: solid var(--accent-color) 2px;
-    border-radius: .125rem;
     font-size: var(--primary-font-size);
     font-weight: 700;
 }
 
-#begin-btn:hover{
-    background-image: linear-gradient(rgb(72, 119, 207), rgb(16, 180, 153));
+button:hover{
+    background-image: linear-gradient(rgb(45, 95, 187), rgb(10, 173, 160));
+    border: solid rgb(7, 157, 202) 2px;
 }
 
-.answers p{
+.answers p, h3{
     cursor: pointer;
-} */
+}
+
+span{
+    font-weight: 900;
+}
+
+a{
+    margin-top: 1rem;
+    color: black;
+}
