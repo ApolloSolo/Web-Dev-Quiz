@@ -13,8 +13,8 @@ const options = ["a", "b", "c", "d"];
 const questions = [
     {
         id: 0,
-        question: "Often used data types do not include:",
-        awensers: ["Boolean", "Alert", "Number", "String"],
+        question: "The value of pH for a sulfuric acid solution that contains 0.3 moles of acid per liter of solution is:",
+        awensers: ["1.87", "0.22", "0.74", "2.59"],
         correct: "b",
     },
     {
@@ -25,10 +25,28 @@ const questions = [
     },
     {
         id: 2,
-        question: "What is 10 + 10",
-        awensers: ["7", "5", "20", "10"],
+        question: "A water sample contains 5 mg/liter of acetone vapor. The concentration of acetone expressed in ppm is:",
+        awensers: ["50", "500", "5", "10"],
         correct: "c",
     },
+    {
+        id: 3,
+        question: "All of the following belong to the family of aromatic compounds EXCEPT:",
+        awensers: ["Benzene", "Toluene", "Pentane", "Xylene"],
+        correct: "c",
+    },
+    {
+        id: 4,
+        question: "Which of the following is NOT considered to be a nobal metal:",
+        awensers: ["Rhodium", "Platinum", "Gold", "Pancakes"],
+        correct: "d",
+    },
+    {
+        id: 5,
+        question: "Which of the following belong to the ketone family of organic compounds:",
+        awensers: ["CH3CH2OH", "CH3COH3", "CH3OH", "CH3OCH3"],
+        correct: "b",
+    }
 ];
 
 //Time
@@ -130,6 +148,7 @@ const buildTestContainer = function () {
     }
 };
 
+//Build the form container when last question was answered or when time runs out. Called in endQuiz() 
 const buildFormContainer = function () {
     const containerEl = document.querySelector("#main-container")
     const formConatiner = makeEl("form", "tester-initials", "tester-initials");
@@ -154,7 +173,7 @@ const buildFormContainer = function () {
     containerEl.appendChild(formConatiner);
 }
 
-
+//Answer handler
 const answerClickHandler = function (e) {
     if (e.target.getAttribute("data-answer")) {
         if (e.target.getAttribute("data-answer") === questions[questionCount].correct) {
@@ -187,6 +206,7 @@ const answerClickHandler = function (e) {
     }
 };
 
+//End the quiz once time is up or last question is answered. 
 function endQuiz() {
     const quizBody = document.querySelector("#quiz-body");
     if (quizBody) {
@@ -212,6 +232,7 @@ function saveScore() {
     localStorage.setItem("testerData", JSON.stringify(testerData));
 }
 
+//Load scores from local storage on page load
 function loadTestersScore() {
     const data = localStorage.getItem("testerData");
     testerData = JSON.parse(data);
@@ -221,6 +242,7 @@ function loadTestersScore() {
     }
 }
 
+// Build out the scores section once "View Scores" is clicked or initals are endered at quiz end
 function buildScores(){
     if (testerData === null) {
         alert("No scores to present");
@@ -258,7 +280,9 @@ function buildScores(){
     }
 }
 
+//Quiz begins once you click the "Begin Quiz" button
 btnBegin.addEventListener("click", buildTestContainer);
 
+//Event delegation on main container element
 container.addEventListener("click", answerClickHandler);
 loadTestersScore();
